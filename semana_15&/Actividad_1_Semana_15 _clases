@@ -1,0 +1,53 @@
+public class Estudiante
+{
+    string CarnetEstudiante;
+    int EdadEstudiante;
+    string CarreraEstudiante;
+    string NombreEstudiante;
+    int NotaAdmision;
+    public static void Main()
+    {
+        Console.WriteLine("Hecho por: Luis García");
+        Console.WriteLine("Ingrese su nombre");
+        string nombreIngresado = Console.ReadLine();
+        Console.WriteLine("Ingrese su edad"); 
+        int edadEstudiante = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Ingrese su carrera");
+            string carreraEstudiante = Console.ReadLine();
+            Console.WriteLine("Ingrese su numero de carnet");
+            string numeroCarnet = Console.ReadLine();
+            Console.WriteLine("Ingrese su nota de Admision");
+            int calculoNota = Convert.ToInt32(Console.ReadLine());
+                    
+        Estudiante MostrarResultados = new Estudiante (nombreIngresado, edadEstudiante , carreraEstudiante , numeroCarnet , calculoNota);
+        MostrarResultados.show();
+
+        CalcularNota(calculoNota , numeroCarnet);
+
+    }
+    public static void CalcularNota (int calculoNota , string numeroCarnet){
+        if (calculoNota >= 75 && numeroCarnet.EndsWith("2025") ){
+                Console.WriteLine("Si puede matricularse");
+            } else  {
+                Console.WriteLine("No se puede matricular , el numero de carnet no termina en 2025 u/o nota de admision muy baja de 75");
+                    
+            } 
+    }
+    Estudiante (string estudiante_,int edad_, string carrera_ ,string carnet_, int notaAdmision_)
+    {
+        this.NombreEstudiante = estudiante_;
+        this.EdadEstudiante = edad_;
+        this.CarreraEstudiante = carrera_;
+        this.CarnetEstudiante= carnet_;
+        this.NotaAdmision= notaAdmision_;
+    }
+    void show()
+    {
+        Console.Clear();
+        Console.WriteLine("Nombre ingresado " + this.NombreEstudiante);
+        Console.WriteLine("Edad ingresado " + this.EdadEstudiante);
+        Console.WriteLine("Carrera ingresada " + this.CarreraEstudiante);
+        Console.WriteLine("Carnet ingresado " + this.CarnetEstudiante);
+        Console.WriteLine("Nota de admision " + this.NotaAdmision);
+    }
+}
