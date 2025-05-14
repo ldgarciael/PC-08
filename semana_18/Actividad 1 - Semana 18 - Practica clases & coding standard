@@ -1,0 +1,99 @@
+namespace CodingClases;
+class ProgramVariables{
+    static void Main(){
+        string[] Nombres = new string[10];
+        double[,] Notas = new double[10, 10];
+
+        for (int i = 0; i < Nombres.Length; i++){
+            Console.WriteLine($"Ingrese el nombre del estudiante {i + 1}:");
+            Nombres[i] = Console.ReadLine();
+        }
+        for (int fila = 0; fila < 10; fila++){
+            Console.WriteLine($"Ingrese las 10 notas para {Nombres[fila]}:");
+            for (int columna = 0; columna < 10; columna++){
+                double nota;
+                while (true){
+                    Console.Write($"Nota {columna + 1}: ");
+                    string input = Console.ReadLine();
+                    if (double.TryParse(input, out nota) && nota >= 0 && nota <= 100){
+                        Notas[fila, columna] = nota;
+                        break;
+                    }
+                    else{
+                        Console.WriteLine("Ingrese una nota entre 0 y 100");
+                    }
+                }
+            }
+        }
+        MenuOpcion.MostrarMenu(Nombres, Notas);
+    }
+}
+class MenuOpcion{
+    public static void MostrarMenu(string[] Nombres, double[,] Notas){
+        while (true){
+            Console.WriteLine("1) Mostrar nombre y notas aprobadas para cada alumno.");
+            Console.WriteLine("2) Mostrar nombre y notas no aprobadas para cada alumno.");
+            Console.WriteLine("3) Mostrar el promedio de notas del grupo.");
+            Console.WriteLine("4) Salir del programa.");
+            Console.Write("Seleccione una opcion: ");
+            string convertirOpcion = Console.ReadLine();
+            int opcion;
+
+            if (int.TryParse(convertirOpcion, out opcion)){
+                switch (opcion){
+                    case 1:
+                        Console.WriteLine("Nombres y notas aprobadas:");
+                        for (int i = 0; i < 10; i++){
+                            Console.WriteLine($"Estudiante: {Nombres[i]}");
+                            Console.Write("Notas aprobadas: ");
+                            for (int j = 0; j < 10; j++){
+                                if (Notas[i, j] >= 65){
+                                    Console.Write($"{Notas[i, j]} ");
+                                }
+                            }
+                            Console.WriteLine();
+                        }
+                        break;
+
+                    case 2:
+                        Console.WriteLine("Nombres y notas no aprobadas:");
+                        for (int i = 0; i < 10; i++){
+                            Console.WriteLine($"Estudiante: {Nombres[i]}");
+                            Console.Write("Notas no aprobadas: ");
+                            for (int j = 0; j < 10; j++){
+                                if (Notas[i, j] < 65){
+                                    Console.Write($"{Notas[i, j]} ");
+                                }
+                            }
+                            Console.WriteLine();
+                        }
+                        break;
+
+                    case 3:
+                        double sumaTotal = 0;
+                        int totalNotas = 0;
+                        for (int i = 0; i < 10; i++){
+                            for (int j = 0; j < 10; j++){
+                                sumaTotal += Notas[i, j];
+                                totalNotas++;
+                            }
+                        }
+                        double promedioGrupo = sumaTotal / totalNotas;
+                        Console.WriteLine($"El promedio de notas del grupo es: {promedioGrupo}");
+                        break;
+
+                    case 4:
+                        break;
+
+                    default:
+                        Console.WriteLine("Opcion invalida");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ingrese un numero valido");
+            }
+        }
+    }
+}
